@@ -15,4 +15,9 @@ class certificate extends Model
         'donor',
         'user_id'
     ];
+    
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+
 }

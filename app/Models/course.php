@@ -14,4 +14,8 @@ class course extends Model
         'discription',
     ];
 
+    public function Users(){
+        return $this->belongsTo(User::class);
+    }
+
 }

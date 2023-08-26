@@ -18,4 +18,8 @@ class lecture extends Model
         'course_id'
     ];
 
+    public function Users(){
+        return $this->belongsTo(User::class);
+    }
+
 }

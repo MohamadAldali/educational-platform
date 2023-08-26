@@ -16,4 +16,8 @@ class work extends Model
         'end_date',
         'user_id'
     ];
+
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
 }
