@@ -19,7 +19,7 @@ class lecture extends Model
     ];
 
     public function Users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 
 }
