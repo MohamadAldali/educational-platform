@@ -23,4 +23,8 @@ class User_details extends Model
     public function Users(){
         return $this->belongsTo(User::class);
     }
+    public function TypeUser(){
+        return $this->belongsTo(TypeUser::class);
+    }
+
 }

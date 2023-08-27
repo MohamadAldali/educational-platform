@@ -54,10 +54,7 @@ class User extends Authenticatable
         return $this->hasMany(certificate::class);
     }
 
-    public function TypeUser(){
-        return $this->belongsTo(TypeUser::class);
-    }
-
+   
     public function courses(){
         return $this->belongsTo(course::class);
     }
@@ -66,7 +63,7 @@ class User extends Authenticatable
         return $this->belongsTo(lecture::class);
     }
     public function User_details(){
-        return $this->hasMany(User_details::class);
+        return $this->hasOne(User_details::class);
     }
 
 }

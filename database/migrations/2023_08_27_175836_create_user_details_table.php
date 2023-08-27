@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('type_users_id')->constrained('type_users');
+            $table->boolean('is_checked');
+            $table->boolean('is_active');
+            $table->boolean('gender');
+            $table->boolean('language');
+            $table->date('birth_date');
+            $table->date('join_date');
+            $table->string('image');
+           
+          
+
             $table->timestamps();
         });
     }
