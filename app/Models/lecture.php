@@ -13,7 +13,7 @@ class lecture extends Model
 
     protected $fillable = [
         'number',
-        'discription',
+        'discription_le',
         'videoPath',
         'course_id'
     ];

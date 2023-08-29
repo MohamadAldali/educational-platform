@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\course;
 use App\Http\Controllers\Controller;
+use App\Models\lecture;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -13,7 +14,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view('dachboard.courses.index', [
+         'courses' => $courses
+     ]);
     }
 
     /**
@@ -21,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('dachboard.courses.create');
     }
 
     /**
@@ -29,7 +33,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $validatedData = $request->validate([
+            'name_courses' => 'required|unique:courses',
+            'discription' => 'required',
+      
+        ]);
+        course::create($validatedData);
+        return redirect()->route('course.index')->with('success', 'User Created Successfully');
     }
 
     /**
@@ -37,7 +48,12 @@ class CourseController extends Controller
      */
     public function show(course $course)
     {
-        //
+    
+       
+        return redirect()-> route('lecture.index')->with('course', $course);
+  
+         
+     
     }
 
     /**
