@@ -12,24 +12,26 @@ class LectureController extends Controller
      * Display a listing of the resource.
      */
 
+    
      
     public function index()
     {
-        $course=session('course');
+        
+         $course=session('course');
        
         $lectures = lecture::all()->where('course_id',$course->id);
         return view('dachboard.lecture.index', [
-         'lectures' => $lectures  ,'course'=>$course]);
+         'lectures' => $lectures  ]);
    
      }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(course  $course )
+    public function create( )
     {
-        dd($course); 
-        return view('dachboard.lecture.create',$course);
+       
+        return view('dachboard.lecture.create');
     }
 
     

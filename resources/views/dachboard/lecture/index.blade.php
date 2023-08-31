@@ -14,7 +14,7 @@
 
 <div class="card-footer mb-3 " >
 
-    <a  href="{{route('lecture.create',['course'=>$course])}}" class="btn btn-success text-dark m-1 " float-right>Create Lecture</a>
+    <a  href="{{route('lecture.create')}}" class="btn btn-success text-dark m-1 " float-right>Create Lecture</a>
    
 </div>
 @if(count($lectures)>0)

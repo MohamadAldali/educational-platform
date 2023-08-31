@@ -47,8 +47,8 @@
             <input type="textarea" class="form-control" id="videoPath" name="videoPath" placeholder="videoPath" required>
           </div>
         </div>
-        {{dd($course_id)}}
-        <input type="hidden" name="course_id" id="course_id" value="{{$course_id}}">
+         <!-- <input type="hidden" name="course_id" id="course_id" value="{{//$course_id}}"> -->
+       
       </div>
       <!-- /.card-body -->
       <div class="card-footer " >
