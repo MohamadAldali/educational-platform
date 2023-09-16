@@ -30,3 +30,6 @@ Middleware: Middleware is employed to add additional layers of logic to HTTP req
 Routing: Laravel's routing system is used to define URL routes for various parts of the application.
 
 This Educational Dashboard Control Panel serves as a practical demonstration of Laravel's capabilities in the context of educational platforms, providing a solid foundation for further development and customization.
+
+# Note:
+This project marks my first foray into Laravel, developed during my training period with this framework. It represents a significant milestone in my journey to master Laravel and showcases my initial efforts in utilizing its powerful features for educational purposes. I look forward to further refining my Laravel skills and creating even more innovative projects in the future.
