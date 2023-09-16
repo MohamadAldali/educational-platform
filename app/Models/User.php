@@ -24,7 +24,15 @@ class User extends Authenticatable
         'email',
         'num',
         'password',
+        'is_attend',
+        'is_checked',
+        'is_active',
+        'gender',
+        'birth_date',
+        'join_date',
+        'image',
     ];
+   
     
 
     /**
@@ -61,11 +69,11 @@ class User extends Authenticatable
         return $this->belongsToMany(course::class);
     }
 
-    public function lectures(){
-        return $this->belongsToMany(lecture::class);
+    public function lectures()
+    {
+        return $this->belongsToMany(Lecture::class, 'lecture_user', 'user_id', 'lecture_id')
+            ->withPivot('is_attend'); // إذا كان لديك حقل إضافي في جدول العلاقة
     }
-    public function User_details(){
-        return $this->hasOne(User_details::class);
-    }
+  
 
 }

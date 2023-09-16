@@ -7,12 +7,13 @@
 
 
 @endsection
+@section('title')
+esit user
+@endsection
 @section('content')
 
 <div class="card card-info">
-    <div class="card-header">
-      <h3 class="card-title">Horizontal Form</h3>
-    </div>
+   
     <!-- /.card-header -->
     <!-- form start -->
 
@@ -40,6 +41,7 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Type to change the password" >
           </div>
         </div>
+        @if(auth()->user()->num ==1)
         <div class="form-group row">
             <label for="inputtype" class="col-sm-2 col-form-label">Account Type</label>
             <div class="col-sm-10">
@@ -47,10 +49,14 @@
                     <option value="0"  @if($user->num==0)selected @endif>Not enabled</option>
                     <option value="3" @if($user->num==3)selected @endif>Student</option>
                     <option value="2" @if($user->num==2)selected @endif>Teacher</option>
+                    
                     <option value="1"  @if($user->num==1)selected @endif>Admin</option>
+                    
                   </select>
+                  
             </div>
           </div>
+          @endif
       </div>
       <!-- /.card-body -->
       <div class="card-footer " >

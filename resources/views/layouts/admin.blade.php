@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ config('app.locales.' . app()->getLocale() . '.dir') }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,7 +39,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" >
 <div class="wrapper">
 
     <!-- Preloader
@@ -55,12 +55,6 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
 
@@ -107,7 +101,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('mycustom.login') }}</a>
                                 </li>
                             @endif
 
@@ -126,7 +120,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('mycustom.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -144,6 +138,9 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
+ 
+ 
+    
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
        
@@ -153,10 +150,18 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    @if(auth()->user()->image == null)
+
+                    <img class="img-circle elevation-2" src="{{asset('imgs/null.jpeg')}}" alt="User profile picture" >
+             
+                    @else
+                    <img class="img-circle elevation-2" src="{{asset('imgs/'.auth()->user()->image)}}" alt="User profile picture" >
+             
+    
+                  @endif
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block" style=" text-decoration-line: none">{{ auth()->user()->name}}</a>
+                    <a href="{{ route('user.show',auth()->user()->id) }}" class="d-block" style=" text-decoration-line: none">{{ auth()->user()->name}}</a>
                 </div>
             </div>
 
@@ -165,59 +170,63 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item">
+                         @if(Auth::user()->num == 1)
+                    <li class="nav-item menu-open">
                         <a href="#" class="nav-link">
-                           
                             <p>
-                                {{ __('Users') }}
+                                {{ __('mycustom.users') }}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('user.create')}}" class="nav-link">
+                                <a href="{{ route('user.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ __('Add User') }}</p>
+                                    <p>{{ __('mycustom.AddUser') }}</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('user.index')}}" class="nav-link">
+                                <a href="{{ route('user.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ __('All Users') }}</p>
+                                    <p>{{ __('mycustom.AllUsers') }}</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
+                    @endif
+            
+                    <li class="nav-item menu-open">
                         <a href="#" class="nav-link">
-                           
                             <p>
-                                {{ __('Courses') }}
+                                {{ __('mycustom.Courses') }}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview ">
+                            @if(Auth::user()->num == 1)
                             <li class="nav-item">
-                                <a href="{{route('course.create')}}" class="nav-link">
+                              
+                                <a href="{{ route('course.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ __('Add Course') }}</p>
+                                    <p>{{ __('mycustom.AddCourse') }}</p>
                                 </a>
+                           
                             </li>
+                             @endif
                             <li class="nav-item">
-                                <a href="{{route('course.index')}}" class="nav-link">
+                                <a href="{{ route('course.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>{{ __('All Course') }}</p>
+                                    <p>{{ __('mycustom.All Course') }}</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </nav>
+            
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
@@ -230,14 +239,9 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">@yield('title')</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
+                   
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

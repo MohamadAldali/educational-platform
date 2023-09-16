@@ -11,6 +11,11 @@ class WorkController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -21,7 +26,10 @@ class WorkController extends Controller
      */
     public function create()
     {
-        //
+       
+        $id  = session('user-id');
+     
+        return view('dachboard.work.create',['id'=>$id]);
     }
 
     /**
@@ -29,7 +37,19 @@ class WorkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+
+        $validatedData = $request->validate([
+            'name_works' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'company' => 'required',
+        ]);
+        $id  = session('user-id');
+        $validatedData['user_id'] = $id;
+        work::create($validatedData);
+        return redirect()->route('user.show',$id)->with('success', 'User Created Successfully');
+   
     }
 
     /**
@@ -59,8 +79,14 @@ class WorkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(work $work)
+    public function destroy(string $id)
     {
-        //
+
+        $work = work::with('user')->findOrFail($id);
+        $id_user=$work->user_id;
+        $work->delete();
+
+        return redirect("/user/$id_user")->with('success', 'User Deleted Successfully');
+
     }
 }

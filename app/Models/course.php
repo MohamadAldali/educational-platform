@@ -15,7 +15,12 @@ class course extends Model
     ];
 
     public function Users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+                ->withPivot('mark');
+        
     }
 
+    public function lecture(){
+        return $this->hasMany(lecture::class);
+    }
 }

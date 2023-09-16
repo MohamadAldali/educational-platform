@@ -12,14 +12,21 @@ class lecture extends Model
 
 
     protected $fillable = [
-        'number',
+        'num_le',
         'discription_le',
         'videoPath',
-        'course_id'
+        'course_id',
+        'is_attend'
     ];
 
-    public function Users(){
-        return $this->belongsToMany(User::class);
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'lecture_user', 'lecture_id', 'user_id')
+            ->withPivot('is_attend'); // إذا كان لديك حقل إضافي في جدول العلاقة
+    }
+    
+    public function course(){
+        return $this->belongsTo(course::class);
     }
 
 }

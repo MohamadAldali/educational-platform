@@ -8,6 +8,9 @@
 
 
 @endsection
+@section('title')
+create lecture
+@endsection
 @section('content')
 
 
@@ -18,9 +21,7 @@
 
 
 <div class="card card-info">
-    <div class="card-header">
-      <h3 class="card-title">Horizontal Form</h3>
-    </div>
+   
     <!-- /.card-header -->
     <!-- form start -->
 
@@ -29,12 +30,7 @@
         @csrf
         
       <div class="card-body">
-        <div class="form-group row">
-            <label for="number" class="col-sm-2 col-form-label">Discription</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="number" name="number" placeholder="number" required>
-            </div>
-          </div>
+      
         <div class="form-group row">
           <label for="discription_le" class="col-sm-2 col-form-label">Discription</label>
           <div class="col-sm-10">
@@ -47,8 +43,8 @@
             <input type="textarea" class="form-control" id="videoPath" name="videoPath" placeholder="videoPath" required>
           </div>
         </div>
-         <!-- <input type="hidden" name="course_id" id="course_id" value="{{//$course_id}}"> -->
-       
+
+    
       </div>
       <!-- /.card-body -->
       <div class="card-footer " >

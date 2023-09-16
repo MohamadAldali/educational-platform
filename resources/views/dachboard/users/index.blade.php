@@ -8,24 +8,24 @@
 <!-- Theme style -->
 
 @endsection
-
+@section('title')
+{{ __('mycustom.AllUsers') }}
+@endsection
 
 @section('content')
 @if(count($users)>0)
 <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">DataTable with default features</h3>
-    </div>
+  
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Id</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Num</th>
-          <th></th>
+          <th>{{ __('mycustom.Name') }}</th>
+          <th>{{ __('mycustom.email') }}</th>
+          <th>{{ __('mycustom.Account Type') }}</th>
+          <th style="text-align: center;"> {{ __('mycustom.Actions') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -35,14 +35,22 @@
             <td>{{$user->name}}
             </td>
             <td>{{$user->email}}</td>
-            <td>{{$user->num}}</td>
-            <td>
-              <a href="{{ route('user.show',$user->id) }}" class="btn btn-success text-dark m-1"><b>View details</b></a>
-              <a href="{{ route('user.edit',$user->id) }}" class="btn btn-warning m-1"><b>Edit</b></a>
+            <td> @if($user->num==0)
+              {{ __('mycustom.Not enabled') }}
+              @elseif($user->num==3)
+              {{ __('mycustom.Student') }}
+              @elseif($user->num==2)
+              {{ __('mycustom.Teacher') }}
+              @elseif($user->num==1)
+              {{ __('mycustom.Admin') }}
+              @endif</td>
+            <td style="text-align: center;">
+              <a href="{{ route('user.show',$user->id) }}" class="btn btn-success text-dark m-1"><b>{{ __('mycustom.Viewdetails') }}</b></a>
+              <a href="{{ route('user.edit',$user->id) }}" class="btn btn-warning m-1"><b>{{ __('mycustom.Edit') }}</b></a>
               <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline-block">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger m-1 text-dark">Delete</button>
+                <button type="submit" class="btn btn-danger m-1 text-dark">{{ __('mycustom.Delete') }}</button>
             </form>
             </td>
           </tr>
@@ -53,10 +61,10 @@
         <tfoot>
         <tr>
           <th>Id</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Num</th>
-          <th></th>
+          <th>{{ __('mycustom.Name') }}</th>
+          <th>{{ __('mycustom.email') }}</th>
+          <th>{{ __('mycustom.Account Type') }}</th>
+          <th style="text-align: center;"> {{ __('mycustom.Actions') }}</th>
         </tr>
         </tfoot>
       </table>

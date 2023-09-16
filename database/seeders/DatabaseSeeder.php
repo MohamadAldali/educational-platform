@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
              'email' => 'mohamad@gmail.com',
              'num' => '1', //admin
              'password' => Hash::make('123456789'),
+             'birth_date'=> fake()->date(),
+             'join_date'=> fake()->date(),
+     
         ]);
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->integer('num_le');
             $table->string('discription_le');
             $table->string('videoPath');
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();

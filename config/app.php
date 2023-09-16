@@ -84,6 +84,11 @@ return [
     */
 
     'locale' => 'en',
+    'locales' => [
+        'en' => ['name' => 'English', 'script' => 'Latn', 'dir' => 'ltr'],
+        'ar' => ['name' => 'Arabic', 'script' => 'Arab', 'dir' => 'rtl'], // اتجاه RTL هنا
+    ],
+    
 
     /*
     |--------------------------------------------------------------------------

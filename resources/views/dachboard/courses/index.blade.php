@@ -9,13 +9,19 @@
 
 @endsection
 
-
+@section('title')
+index course
+@endsection
 @section('content')
+@if(Auth::user()->num == 1)
+<div class="card-footer mb-3 " >
+  <a  href="{{route('course.create')}}" class="btn btn-success text-dark m-1 " float-right>Create Course</a>
+ 
+</div>
+@endif
 @if(count($courses)>0)
 <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">DataTable with default features</h3>
-    </div>
+
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
@@ -24,24 +30,30 @@
           <th>Id</th>
           <th>Course</th>
           <th>Discription</th>
-          <th></th>
+          <th>Teacher </th>
+          <th style="text-align: center;"> Actions</th>
         </tr>
         </thead>
         <tbody>
           @foreach ($courses as $course )
+          
           <tr>
             <td>{{$course->id}}</td>
             <td>{{$course->name_courses}}
             </td>
             <td>{{$course->discription}}</td>
-            <td>
+            <td>{{ $course->users[0]['name']}}</td>
+            <td style="text-align: center;">
               <a href="{{ route('course.show',$course) }}" class="btn btn-success text-dark m-1"><b>View details</b></a>
-              <a href="" class="btn btn-warning m-1"><b>Edit</b></a>
-              <form action="" method="POST" style="display: inline-block">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger m-1 text-dark">Delete</button>
-            </form>
+              @if(Auth::user()->num == 1)
+              <a href="{{ route('course.edit',$course->id) }}" class="btn btn-warning m-1"><b>Edit</b></a>
+
+              <form action="{{ route('course.destroy', $course->id) }}" method="POST" style="display: inline-block">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger m-1 text-dark">Delete</button>
+              </form>
+              @endif
             </td>
           </tr>
           @endforeach
@@ -53,7 +65,8 @@
             <th>Id</th>
             <th>Course</th>
             <th>Discription</th>
-            <th></th>
+            <th>Teacher</th>
+            <th style="text-align: center;"> Actions</th>
         </tr>
         </tfoot>
       </table>
